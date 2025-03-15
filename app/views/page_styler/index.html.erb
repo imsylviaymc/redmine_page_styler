@@ -1,0 +1,104 @@
+<%# encoding: utf-8 %>
+<%# Redmine Page Styler - A plugin for customizing CSS of specific Redmine pages %>
+<%# Copyright (C) 2025 #Sylv!a %>
+
+<div class="contextual">
+  <%= link_to l(:label_help), '/page_styler/help', class: 'icon icon-help', id: 'help-button' %>
+  <%= link_to l(:label_new_style), { action: 'new' }, class: 'icon icon-add' %>
+</div>
+
+<h2><%= l(:label_page_styler) %></h2>
+
+<div class="autoscroll">
+  <% if @css_rules.present? %>
+    <table class="list">
+      <thead>
+        <tr>
+          <th><%= l(:field_name) %></th>
+          <th><%= l(:label_enabled) %></th>
+          <th><%= l(:field_target) %></th>
+          <th><%= l(:field_css) %></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @css_rules.each do |rule| %>
+          <tr class="<%= rule['enabled'] == '0' ? 'disabled-rule' : '' %>">
+            <td class="name"><%= h(rule['name']) %></td>
+            <td class="enabled">
+              <%= form_tag({action: 'update', id: rule['id']}, method: :put, class: 'toggle-form') do %>
+                <%= hidden_field_tag 'css_rule[name]', rule['name'] %>
+                <%= hidden_field_tag 'css_rule[global]', rule['global'] %>
+                <%= hidden_field_tag 'css_rule[controller]', rule['controller'] %>
+                <%= hidden_field_tag 'css_rule[action]', rule['action'] %>
+                <%= hidden_field_tag 'css_rule[path_pattern]', rule['path_pattern'] %>
+                <%= hidden_field_tag 'css_rule[css]', rule['css'] %>
+                <%= hidden_field_tag 'css_rule[enabled]', rule['enabled'] == '0' ? '1' : '0' %>
+                <%= submit_tag rule['enabled'] == '0' ? l(:button_enable) : l(:button_disable), 
+                      class: "button-#{rule['enabled'] == '0' ? 'enable' : 'disable'}" %>
+              <% end %>
+            </td>
+            <td class="target">
+              <% if rule['global'] == '1' %>
+                <span class="badge badge-info"><%= l(:label_global) %></span>
+              <% elsif rule['controller'].present? && rule['action'].present? %>
+                <span class="badge badge-success"><%= "#{rule['controller']}##{rule['action']}" %></span>
+              <% elsif rule['path_pattern'].present? %>
+                <span class="badge badge-warning"><%= h(rule['path_pattern']) %></span>
+              <% end %>
+            </td>
+            <td class="css">
+              <pre><code class="css"><%= h(rule['css'].truncate(100)) %></code></pre>
+            </td>
+            <td class="buttons">
+              <%= link_to l(:button_edit), { action: 'edit', id: rule['id'] }, class: 'icon icon-edit' %>
+              <%= link_to l(:button_delete), { action: 'destroy', id: rule['id'] }, 
+                    data: { confirm: l(:text_are_you_sure) },
+                    method: :delete,
+                    class: 'icon icon-del' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p class="nodata"><%= l(:label_no_data) %></p>
+  <% end %>
+</div>
+
+<% content_for :header_tags do %>
+  <style>
+    .disabled-rule {
+      opacity: 0.6;
+      background-color: #f5f5f5;
+    }
+    .toggle-form {
+      margin: 0;
+      display: inline;
+    }
+    .toggle-form input[type="submit"] {
+      padding: 2px 8px;
+      margin: 0;
+    }
+    .button-enable {
+      background: #4ebf67;
+      color: #000;
+      border-color: #3a9651;
+      padding: 2px 8px 2px 25px;
+      background-image: url(../images/true.png);
+      background-repeat: no-repeat;
+      background-position: 6px 50%;
+      min-width: 80px;
+    }
+    .button-disable {
+      background: #e74c3c;
+      color: #000;
+      border-color: #c0392b;
+      padding: 2px 8px 2px 25px;
+      background-image: url(../images/false.png);
+      background-repeat: no-repeat;
+      background-position: 6px 50%;
+      min-width: 80px;
+    }
+  </style>
+<% end %>

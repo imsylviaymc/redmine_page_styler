@@ -1,0 +1,242 @@
+<div class="box tabular">
+  <p>
+    <label for="css_rule_name"><%= l(:field_name) %> <span class="required">*</span></label>
+    <%= text_field_tag 'css_rule[name]', css_rule['name'], required: true, size: 60, class: 'responsive-input' %>
+    <em class="info"><%= l(:text_name_info) %></em>
+  </p>
+  
+  <p>
+    <label for="css_rule_enabled"><%= l(:label_enabled) %></label>
+    <%= check_box_tag 'css_rule[enabled]', '1', css_rule['enabled'] != '0', id: 'css_rule_enabled' %>
+    <em class="info"><%= l(:text_enabled_info) %></em>
+  </p>
+  
+  <div class="css-editor">
+    <div class="css-container">
+      <h3><%= l(:field_css) %> <span class="required">*</span></h3>
+      <div class="css-actions">
+        <button type="button" id="format-css-button" class="button"><%= l(:button_format_css) %></button>
+      </div>
+      
+      <!-- CSS 常用屬性快速插入區域 -->
+      <div class="css-snippets">
+        <h4><%= l(:label_common_css_properties) %></h4>
+        <div class="snippets-container">
+          <button type="button" class="snippet-btn" data-snippet="color: #000000;">color</button>
+          <button type="button" class="snippet-btn" data-snippet="background-color: #ffffff;">background-color</button>
+          <button type="button" class="snippet-btn" data-snippet="font-size: 14px;">font-size</button>
+          <button type="button" class="snippet-btn" data-snippet="font-weight: bold;">font-weight</button>
+          <button type="button" class="snippet-btn" data-snippet="margin: 10px;">margin</button>
+          <button type="button" class="snippet-btn" data-snippet="padding: 10px;">padding</button>
+          <button type="button" class="snippet-btn" data-snippet="border: 1px solid #cccccc;">border</button>
+          <button type="button" class="snippet-btn" data-snippet="border-radius: 5px;">border-radius</button>
+          <button type="button" class="snippet-btn" data-snippet="width: 100%;">width</button>
+          <button type="button" class="snippet-btn" data-snippet="height: auto;">height</button>
+          <button type="button" class="snippet-btn" data-snippet="display: flex;">display</button>
+          <button type="button" class="snippet-btn" data-snippet="text-align: center;">text-align</button>
+        </div>
+      </div>
+      
+      <%= text_area_tag 'css_rule[css]', css_rule['css'], required: true, rows: 20, class: 'wiki-edit responsive-textarea', id: 'css_rule_css' %>
+    </div>
+  </div>
+</div>
+
+<%= javascript_tag do %>
+$(document).ready(function() {
+  // 確保文本區域在手機上也能正確顯示
+  adjustTextareaSize();
+  $(window).resize(adjustTextareaSize);
+  
+  // 初始化格式化按鈕
+  $('#format-css-button').click(formatCss);
+  
+  // 初始化 CSS 屬性快速插入功能
+  $('.snippet-btn').click(function() {
+    insertCssSnippet($(this).data('snippet'));
+  });
+});
+
+// 調整文本區域大小
+function adjustTextareaSize() {
+  var textarea = $('#css_rule_css');
+  var container = textarea.closest('.css-container');
+  
+  // 確保文本區域寬100%
+  textarea.css('width', '100%');
+  
+  // 如果是手機模式
+  if (window.innerWidth <= 767) {
+    // 調整文本區域高度
+    textarea.attr('rows', 15);
+  } else {
+    // 恢復原始高度
+    textarea.attr('rows', 20);
+  }
+}
+
+// 插入 CSS 屬性片段
+function insertCssSnippet(snippet) {
+  var textarea = $('#css_rule_css');
+  var cursorPos = textarea.prop('selectionStart');
+  var textBefore = textarea.val().substring(0, cursorPos);
+  var textAfter = textarea.val().substring(cursorPos);
+  
+  // 如果前一行不是空行，並且不是在行首，則添加換行
+  if (cursorPos > 0 && textBefore.charAt(cursorPos - 1) !== '\n' && textBefore.trim() !== '') {
+    snippet = '\n  ' + snippet;
+  } else if (cursorPos > 0 && textBefore.charAt(cursorPos - 1) === '\n') {
+    snippet = '  ' + snippet;
+  }
+  
+  // 如果後面不是換行或空白，則添加換行
+  if (textAfter.length > 0 && textAfter.charAt(0) !== '\n' && textAfter.trim() !== '') {
+    snippet = snippet + '\n';
+  }
+  
+  // 插入片段
+  textarea.val(textBefore + snippet + textAfter);
+  
+  // 設置光標位置到插入的片段之後
+  var newCursorPos = cursorPos + snippet.length;
+  textarea.prop('selectionStart', newCursorPos);
+  textarea.prop('selectionEnd', newCursorPos);
+  
+  // 聚焦文本區域
+  textarea.focus();
+}
+
+// 格式化 CSS 代碼
+function formatCss() {
+  var textarea = $('#css_rule_css');
+  var css = textarea.val();
+  
+  if (!css.trim()) return;
+  
+  try {
+    // 使用簡單的正則表達式進行基本格式化
+    var formatted = css
+      // 移除多餘的空白
+      .replace(/\s+/g, ' ')
+      // 在左大括號前添加空格
+      .replace(/{/g, ' {')
+      // 確保冒號後有空格
+      .replace(/:\s*/g, ': ')
+      // 確保分號後有空格
+      .replace(/;\s*/g, '; ')
+      // 在右大括號前添加換行
+      .replace(/}/g, '\n}')
+      // 在左大括號後添加換行
+      .replace(/{\s*/g, '{\n  ')
+      // 在分號後添加換行（除非是最後一個屬性）
+      .replace(/;\s(?!})/g, ';\n  ')
+      // 確保選擇器之間有換行
+      .replace(/}\s*([^}])/g, '}\n\n$1')
+      // 移除多餘的空行
+      .replace(/\n\s*\n/g, '\n\n');
+    
+    textarea.val(formatted);
+    
+    // 顯示成功消息
+    showFormatMessage(true);
+  } catch (e) {
+    console.error('CSS formatting error:', e);
+    showFormatMessage(false);
+  }
+}
+
+// 顯示格式化消息
+function showFormatMessage(success) {
+  var message = $('<div>')
+    .addClass('flash ' + (success ? 'notice' : 'error'))
+    .text(success ? '<%= l(:notice_css_formatted) %>' : '<%= l(:error_css_format) %>');
+  
+  // 添加到頁面並設置自動消失
+  message.insertBefore('.css-container');
+  setTimeout(function() {
+    message.fadeOut(function() {
+      message.remove();
+    });
+  }, 3000);
+}
+<% end %>
+
+<style>
+/* 基本樣式 */
+.css-container {
+  border: 1px solid #e4e4e4;
+  background-color: #f6f6f6;
+  padding: 10px;
+  border-radius: 3px;
+  margin-bottom: 10px;
+}
+
+#css_rule_css {
+  width: 100% !important;
+  resize: vertical;
+  font-family: monospace;
+  margin-top: 10px;
+}
+
+.css-actions {
+  margin-bottom: 10px;
+  text-align: right;
+}
+
+/* CSS 屬性快速插入區域樣式 */
+.css-snippets {
+  margin-bottom: 15px;
+  background-color: #fff;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+.css-snippets h4 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #555;
+}
+
+.snippets-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.snippet-btn {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 3px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.snippet-btn:hover {
+  background-color: #e0e0e0;
+  border-color: #999;
+}
+
+/* 響應式調整 */
+@media screen and (max-width: 767px) {
+  input[type="text"], 
+  select, 
+  textarea {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box;
+  }
+  
+  .snippets-container {
+    flex-direction: column;
+    gap: 3px;
+  }
+  
+  .snippet-btn {
+    text-align: left;
+  }
+}
+</style>

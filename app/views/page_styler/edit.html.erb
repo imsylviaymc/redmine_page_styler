@@ -1,0 +1,16 @@
+<%# encoding: utf-8 %>
+<%# frozen_string_literal: true %>
+<%# Redmine Page Styler - A plugin for customizing CSS of specific Redmine pages %>
+<%# Copyright (C) 2025 #Sylv!a %>
+
+<div class="contextual">
+  <%= link_to l(:label_help), '/page_styler/help', class: 'icon icon-help', id: 'help-button' %>
+</div>
+
+<h2><%= l(:label_edit_style) %></h2>
+
+<%= form_tag({action: 'update', id: @css_rule['id']}, method: :put, id: 'style-form') do %>
+  <%= render partial: 'form', locals: {css_rule: @css_rule} %>
+  <%= submit_tag l(:button_save) %>
+  <%= link_to l(:button_cancel), { action: 'index' }, class: 'button-cancel' %>
+<% end %>

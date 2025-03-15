@@ -1,0 +1,192 @@
+# English strings go here for Rails i18n
+en:
+  # Plugin name and description
+  label_page_styler: "Page Styler"
+  label_manage_page_styles: "Manage Page Styles"
+  label_new_style: "New Style"
+  label_edit_style: "Edit Style"
+  label_global: "Global"
+  label_preview: "Preview"
+  label_help: "Help"
+  label_original_style: "Original Style"
+  label_enabled: "Enabled"
+  label_common_css_properties: "Common CSS Properties"
+  
+  # Buttons and notifications
+  button_preview: "Preview"
+  button_enable: "Enable"
+  button_disable: "Disable"
+  button_format_css: "Format CSS"
+  notice_successful_create: "Style was successfully created."
+  notice_successful_update: "Style was successfully updated."
+  notice_successful_delete: "Style was successfully deleted."
+  notice_css_formatted: "CSS has been formatted."
+  error_failed_to_delete: "Failed to delete style."
+  error_css_format: "Failed to format CSS."
+  
+  # Field names
+  field_name: "Style Name"
+  field_controller: "Controller"
+  field_action: "Action"
+  field_path_pattern: "URL Pattern"
+  field_css: "CSS 樣式"
+  field_target: "Target"
+  
+  # Help text
+  text_page_styler_settings_help: "Configure custom CSS styles for specific pages in Redmine. Click 'Manage Page Styles' to add, edit or delete styles."
+  text_page_styler_help: |
+    This plugin allows you to customize the appearance of Redmine by adding custom CSS.
+
+    Simply create a new style, give it a name, write your CSS 樣式, and enable it to see the changes.
+
+    You can use the "Format CSS" button to automatically format your CSS 樣式 for better readability.
+  text_global_style_info: "Apply this style to all pages"
+  text_controller_info: "The controller name (e.g. 'issues', 'projects')"
+  text_action_info: "The action name (e.g. 'index', 'show')"
+  text_path_pattern_info: "A regular expression to match against the request path (e.g. '/issues/\\d+')"
+  text_enabled_info: "Enable or disable this style without deleting it"
+  text_name_info: "A descriptive name for your CSS style"
+  
+  # Feature list labels
+  label_feature_list: "Feature List"
+  label_global_styling: "Global Styling"
+  label_controller_action_styling: "Controller/Action Styling"
+  label_url_pattern_styling: "URL Pattern Styling"
+  label_css_customization: "CSS Customization"
+  
+  # Feature descriptions
+  text_global_styling_desc: "Apply CSS to all pages in Redmine regardless of controller or action."
+  text_controller_action_styling_desc: "Target specific pages by their controller and action combination."
+  text_url_pattern_styling_desc: "Use regular expressions to match URL patterns and apply styles to matching pages."
+  text_css_customization_desc: "Write custom CSS to modify colors, fonts, layouts, and other visual elements."
+  
+  # Controller/Action descriptions
+  label_common_controllers: "Common Controllers and Actions"
+  label_description: "Description"
+  text_issues_index_desc: "The main issues list page showing all issues or filtered issues."
+  text_issues_show_desc: "The detailed view of a single issue."
+  text_projects_index_desc: "The list of all projects."
+  text_projects_show_desc: "The overview page of a specific project."
+  text_my_page_desc: "The personalized dashboard for the current user."
+  text_users_show_desc: "The user profile page."
+  text_wiki_show_desc: "Wiki page display."
+  text_news_index_desc: "The news listing page."
+  
+  # URL pattern examples
+  label_url_pattern_examples: "URL Pattern Examples"
+  label_pattern: "Pattern"
+  text_url_pattern_issues_desc: "Matches any issue detail page (e.g., /issues/123)."
+  text_url_pattern_project_issues_desc: "Matches the issues page for any project."
+  text_url_pattern_project_wiki_desc: "Matches the wiki page for any project."
+  
+  # CSS examples
+  label_css_examples: "CSS Examples"
+  
+  # Common CSS selectors
+  label_common_css_selectors: "Common CSS Selectors"
+  label_selector: "Selector"
+  label_example_usage: "Example Usage"
+  
+  # Global Elements
+  text_top_menu_desc: "The top navigation menu containing account links and help."
+  text_header_desc: "The header section containing the project title and main navigation."
+  text_main_menu_desc: "The main horizontal navigation menu for projects."
+  text_sidebar_desc: "The side panel typically containing contextual information and navigation."
+  text_content_desc: "The main content area of the page."
+  text_body_desc: "The background and base styling for the entire page."
+  text_links_desc: "Basic styling for all links."
+  text_contextual_desc: "Contextual action buttons typically in the top-right of sections."
+  
+  # Issues Pages
+  text_issue_class_desc: "Elements related to issues display."
+  text_issue_subject_desc: "The title or subject of an issue."
+  text_issue_attributes_desc: "The attributes table of an issue."
+  text_issue_priority_desc: "The priority label of an issue."
+  text_issue_status_desc: "The status label of an issue."
+  text_issue_progress_desc: "The progress bar of an issue."
+  text_issue_tree_desc: "The issue relations tree."
+  text_issue_relations_desc: "The issue relations area."
+  text_issue_history_desc: "The issue history area."
+  
+  # Project Pages
+  text_projects_box_desc: "The projects list container."
+  text_projects_row_desc: "Rows in the projects list."
+  text_project_name_desc: "The project name title."
+  text_project_description_desc: "The project description text."
+  text_project_jump_box_desc: "The project quick jump dropdown."
+  text_project_details_desc: "The project details area."
+  
+  # Wiki Pages
+  text_wiki_class_desc: "Wiki content formatting and display."
+  text_wiki_headings_desc: "Headings in wiki pages."
+  text_wiki_page_desc: "The wiki page container."
+  text_wiki_code_desc: "Code blocks in wiki."
+  text_wiki_lists_desc: "List elements in wiki."
+  text_wiki_tables_desc: "Tables in wiki."
+  
+  # User Pages
+  text_user_details_desc: "The user details area."
+  text_user_active_desc: "Styling for active users."
+  text_user_locked_desc: "Styling for locked users."
+  
+  # Tables and Forms
+  text_table_list_desc: "Standard list tables."
+  text_table_rows_desc: "Odd and even rows in tables."
+  text_table_header_desc: "Table header cells."
+  text_input_fields_desc: "Text input fields."
+  text_select_fields_desc: "Dropdown menus."
+  text_textarea_desc: "Multi-line text input areas."
+  text_fieldset_desc: "Form grouping containers."
+  text_label_desc: "Form field labels."
+  
+  # Buttons and Actions
+  text_buttons_desc: "Button elements."
+  text_icons_desc: "Icon elements."
+  text_pagination_desc: "Pagination controls."
+  text_tabs_desc: "Tab navigation."
+  text_contextual_links_desc: "Contextual action links."
+  
+  # Common CSS Properties
+  text_color_desc: "The color of the text or background."
+  text_background_color_desc: "The background color of an element."
+  text_font_family_desc: "The font family of the text."
+  text_font_size_desc: "The font size of the text."
+  text_width_desc: "The width of an element."
+  text_height_desc: "The height of an element."
+  text_margin_desc: "The margin of an element."
+  text_padding_desc: "The padding of an element."
+  text_border_desc: "The border of an element."
+  
+  text_css_examples: |
+    /* Change the header background color */
+    #header {
+      background-color: #3465a4;
+    }
+
+    /* Make the sidebar wider */
+    #sidebar {
+      width: 25%;
+    }
+
+    /* Change the font for issue titles */
+    .subject h3 {
+      font-family: 'Arial', sans-serif;
+      font-size: 1.2em;
+    }
+
+    /* Add a border to tables */
+    table.list {
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+    }
+
+    /* Style the issue priority */
+    .priority {
+      font-weight: bold;
+    }
+
+    /* Make closed issues appear with strikethrough */
+    tr.closed .subject a {
+      text-decoration: line-through;
+      color: #888;
+    }

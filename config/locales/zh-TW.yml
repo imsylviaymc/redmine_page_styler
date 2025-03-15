@@ -1,0 +1,51 @@
+# Traditional Chinese strings go here for Rails i18n
+zh-TW:
+  # 擴充套件名稱和描述
+  label_page_styler: "頁面樣式設計器"
+  label_manage_page_styles: "管理頁面樣式"
+  label_new_style: "新增樣式"
+  label_edit_style: "編輯樣式"
+  label_global: "全域"
+  label_preview: "預覽"
+  label_help: "幫助"
+  label_original_style: "原始樣式"
+  label_enabled: "啟用"
+  label_common_css_properties: "常用 CSS 屬性"
+  
+  # 按鈕和通知
+  button_preview: "預覽"
+  button_enable: "啟用"
+  button_disable: "停用"
+  button_format_css: "格式化 CSS"
+  notice_successful_create: "樣式已成功創建。"
+  notice_successful_update: "樣式已成功更新。"
+  notice_successful_delete: "樣式已成功刪除。"
+  notice_css_formatted: "CSS 已格式化。"
+  error_failed_to_delete: "刪除樣式失敗。"
+  error_css_format: "格式化 CSS 失敗。"
+  
+  # 欄位名稱
+  field_name: "樣式名稱"
+  field_css: "CSS 樣式"
+  
+  # 幫助文字
+  text_page_styler_settings_help: "為 Redmine 中的頁面配置自定義 CSS 樣式。點擊「管理頁面樣式」來新增、編輯或刪除樣式。"
+  text_page_styler_help: |
+    此擴充套件允許您通過添加自定義 CSS 來自定義 Redmine 的外觀。
+
+    只需創建一個新樣式，給它一個名稱，編寫您的 CSS 樣式，並啟用它即可查看更改。
+
+    您可以使用「格式化 CSS」按鈕自動格式化您的 CSS 樣式，以提高可讀性。
+  text_enabled_info: "啟用或停用此樣式而不刪除它"
+  text_name_info: "為您的 CSS 樣式提供一個描述性名稱"
+  
+  # CSS 常用屬性
+  text_color_desc: "文字或背景的顏色。"
+  text_background_color_desc: "元素的背景顏色。"
+  text_font_family_desc: "文字的字體系列。"
+  text_font_size_desc: "文字的字體大小。"
+  text_width_desc: "元素的寬度。"
+  text_height_desc: "元素的高度。"
+  text_margin_desc: "元素的外邊距。"
+  text_padding_desc: "元素的內邊距。"
+  text_border_desc: "元素的邊框。"

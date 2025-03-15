@@ -1,0 +1,27 @@
+<%# encoding: utf-8 %>
+<%# Redmine Page Styler - A plugin for customizing CSS of specific Redmine pages %>
+<%# Copyright (C) 2025 #Sylv!a %>
+
+<div class="contextual">
+  <%= link_to l(:label_help), '/page_styler/help', class: 'icon icon-help', id: 'help-button' %>
+</div>
+
+<h2><%= l(:label_new_style) %></h2>
+
+<%= form_tag({action: 'create'}, method: :post, id: 'style-form') do %>
+  <%= render partial: 'form', locals: {css_rule: @css_rule} %>
+  <%= submit_tag l(:button_create) %>
+  <%= link_to l(:button_cancel), { action: 'index' }, class: 'button-cancel' %>
+<% end %>
+
+<%= javascript_tag do %>
+$(document).ready(function() {
+  toggleFormFields();
+  $('#css_rule_global').change(toggleFormFields);
+});
+
+function toggleFormFields() {
+  var isGlobal = $('#css_rule_global').prop('checked');
+  $('.controller-action-fields, .path-pattern-fields').toggle(!isGlobal);
+}
+<% end %>

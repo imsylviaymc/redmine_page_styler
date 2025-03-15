@@ -1,0 +1,26 @@
+<%# encoding: utf-8 %>
+<%# Redmine Page Styler - A plugin for customizing CSS of specific Redmine pages %>
+<%# Copyright (C) 2025 #Sylv!a %>
+
+<h2>頁面樣式器幫助</h2>
+<p>
+  此擴充套件允許您通過添加自定義 CSS 來自定義 Redmine 的外觀。您可以創建新的樣式，給它一個名稱，編寫您的 CSS 代碼，並啟用它以查看更改。
+</p>
+<p>
+  在樣式編輯器中，您只需填寫樣式名稱和 CSS 代碼，然後選擇啟用選項。您還可以使用「格式化 CSS」按鈕自動整理您的 CSS 代碼，以提高可讀性。
+</p>
+<p>
+  您可以使用以下方式來應用樣式：
+</p>
+<ul>
+  <li><strong>樣式名稱：</strong>為您的 CSS 樣式提供一個描述性名稱。</li>
+  <li><strong>CSS 代碼：</strong>編寫您想要應用的 CSS 代碼。</li>
+  <li><strong>啟用選項：</strong>選擇啟用樣式以使其生效。</li>
+</ul>
+<p>
+  保存樣式後，您可以在 Redmine 的任何頁面上看到您的 CSS 變更。如果您有任何問題，請檢查樣式設置是否正確，並確保樣式已啟用。
+</p>
+
+<p>
+  <%= link_to l(:label_manage_page_styles), { controller: 'page_styler', action: 'index' }, class: 'icon icon-package' %>
+</p>

@@ -1,0 +1,12 @@
+<%# encoding: utf-8 %>
+<%# Redmine Page Styler - A plugin for customizing CSS of specific Redmine pages %>
+<%# Copyright (C) 2025 Sylvia %>
+
+<p>
+  <%= link_to l(:label_manage_page_styles), { controller: 'page_styler', action: 'index' }, class: 'icon icon-package' %>
+  <%= link_to l(:label_help), '/page_styler/help', class: 'icon icon-help' %>
+</p>
+
+<p class="notice">
+  <%= textilizable(l(:text_page_styler_settings_help)) %>
+</p>
